@@ -48,27 +48,42 @@ class GetXController extends GetxController {
 
 //=========================================================
 //==================== Bottom NavBar ======================
-  var data = {}.obs;
+  // var data = {}.obs;
 
-  final DatabaseReference _databaseRef =
-      FirebaseDatabase.instance.ref("Employee");
+  // final DatabaseReference _databaseRef =
+  //     FirebaseDatabase.instance.ref("Employee");
+
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   fetchRealtimeData();
+  // }
+
+  // Future<void> fetchRealtimeData() async {
+  //   try {
+  //     final event = await _databaseRef.once();
+  //     if (event.snapshot.value != null) {
+  //       data.value = Map<String, dynamic>.from(event.snapshot.value as Map);
+  //     } else {
+  //       data.value = {};
+  //     }
+  //   } catch (e) {
+  //     print("Error fetching data: $e");
+  //   }
+  // }
+  final databaseRef = FirebaseDatabase.instance.ref("Employee");
+  var data = <Map<String, dynamic>>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    fetchRealtimeData();
+    listenToRealtimeDatabase();
   }
 
-  Future<void> fetchRealtimeData() async {
-    try {
-      final event = await _databaseRef.once();
-      if (event.snapshot.value != null) {
-        data.value = Map<String, dynamic>.from(event.snapshot.value as Map);
-      } else {
-        data.value = {};
-      }
-    } catch (e) {
-      print("Error fetching data: $e");
-    }
+  Future<void> listenToRealtimeDatabase() async {
+    databaseRef.onValue.listen((event) {
+      final employees = event.snapshot.value as List<dynamic>? ?? [];
+      data.value = employees.map((e) => Map<String, dynamic>.from(e)).toList();
+    });
   }
 }

@@ -23,7 +23,7 @@ class SplashScreenState extends State<SplashScreen> {
   Future<void> _navigateToHome() async {
     try {
       await Future.delayed(const Duration(seconds: 3));
-      await getXController.fetchRealtimeData();
+      await getXController.listenToRealtimeDatabase();
       Get.off(() => const HomeScreen());
     } catch (e) {
       print('Error: $e');

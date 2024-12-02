@@ -52,17 +52,42 @@ class _ManageScreenState extends State<ManageScreen> {
         ),
         child: ListView(
           children: [
-            TextFieldWidget(controller: _idController, width: width),
-            TextFieldWidget(controller: _nameController, width: width),
-            TextFieldWidget(controller: _salaryController, width: width),
-            TextFieldWidget(controller: _startController, width: width),
-            TextFieldWidget(controller: _endController, width: width),
+            TextFieldWidget(
+              controller: _idController,
+              width: width,
+              labelText: "Enter ID",
+            ),
+            TextFieldWidget(
+              controller: _nameController,
+              width: width,
+              labelText: "Employee Name",
+            ),
+            TextFieldWidget(
+              controller: _salaryController,
+              width: width,
+              labelText: "Employee Salary",
+            ),
+            TextFieldWidget(
+              controller: _startController,
+              width: width,
+              labelText: "Work start time",
+            ),
+            TextFieldWidget(
+              controller: _endController,
+              width: width,
+              labelText: "Work end time",
+            ),
             TextFieldWidget(
               controller: _totalHoursController,
               width: width,
               ktype: TextInputType.number,
+              labelText: "Total hours",
             ),
-            TextFieldWidget(controller: _profileImgController, width: width),
+            TextFieldWidget(
+              controller: _profileImgController,
+              width: width,
+              labelText: "Profile image url",
+            ),
             const SizedBox(height: 20),
           ],
         ),

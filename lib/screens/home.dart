@@ -1,6 +1,5 @@
 import 'package:fingerprint/consts/colors.dart';
 import 'package:fingerprint/consts/pages.dart';
-import 'package:fingerprint/getx/get.dart';
 import 'package:fingerprint/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,7 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
         actions: [
           GestureDetector(
             onTap: () {
-              GetXController getXController = Get.find();
+              // GetXController getXController = Get.find();
             },
             child: const CircleAvatar(
               backgroundImage: NetworkImage(
