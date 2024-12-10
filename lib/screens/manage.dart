@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:fingerprint/consts/colors.dart';
+import 'package:fingerprint/functions/id_generate.dart';
 import 'package:fingerprint/getx/get.dart';
+import 'package:fingerprint/widgets/button.dart';
 import 'package:fingerprint/widgets/text.dart';
 import 'package:fingerprint/widgets/textfield.dart';
 import 'package:flutter/material.dart';
@@ -53,11 +55,6 @@ class _ManageScreenState extends State<ManageScreen> {
         child: ListView(
           children: [
             TextFieldWidget(
-              controller: _idController,
-              width: width,
-              labelText: "Enter ID",
-            ),
-            TextFieldWidget(
               controller: _nameController,
               width: width,
               labelText: "Employee Name",
@@ -88,7 +85,25 @@ class _ManageScreenState extends State<ManageScreen> {
               width: width,
               labelText: "Profile image url",
             ),
+            CustomButton(
+              btnColor: ColorsClass.backgroundColor,
+              btnText: "asdadasdasd",
+              onTap: () {
+                getXController.checkEmployee();
+              },
+              width: width,
+            ),
             const SizedBox(height: 20),
+            // TextWidget(
+            //   size: width * 0.07,
+            //   color: ColorsClass.black,
+            //   data: getXController.dataFingers["a_id"],
+            // ),
+            // TextWidget(
+            //   size: width * 0.07,
+            //   color: ColorsClass.black,
+            //   data: getXController.dataFingers["b_datetamp"],
+            // ),
           ],
         ),
       ),
@@ -97,7 +112,7 @@ class _ManageScreenState extends State<ManageScreen> {
           getXController.saveEmployeeData(
             context: context,
             name: _nameController.text,
-            id: _idController.text,
+            id: generateId(),
             salary: "\$${_salaryController.text}",
             profileIMG:
                 "https://www.clipartmax.com/png/middle/91-915439_to-the-functionality-and-user-experience-of-our-site-red-person-icon.png",

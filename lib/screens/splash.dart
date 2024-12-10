@@ -1,4 +1,4 @@
-import 'package:fingerprint/consts/colors.dart'; 
+import 'package:fingerprint/consts/colors.dart';
 import 'package:fingerprint/getx/get.dart';
 import 'package:fingerprint/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +24,7 @@ class SplashScreenState extends State<SplashScreen> {
     try {
       await Future.delayed(const Duration(seconds: 3));
       await getXController.listenToRealtimeDatabase();
+      await getXController.checkEmployee();
       Get.off(() => const HomeScreen());
     } catch (e) {
       print('Error: $e');

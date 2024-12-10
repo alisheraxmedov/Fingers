@@ -61,6 +61,7 @@
 
 import 'package:fingerprint/consts/colors.dart';
 import 'package:fingerprint/getx/get.dart';
+import 'package:fingerprint/screens/user_profile.dart';
 import 'package:fingerprint/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -101,6 +102,12 @@ class FirstScreen extends StatelessWidget {
                 data: employee['status'] ? "Active" : "Inactive",
               ),
               onTap: () {
+                Get.to(
+                  UserProfileScreen(
+                    userData: employee,
+                  ),
+                  transition: Transition.fade,
+                );
                 // Add navigation or action for employee details
               },
             ),

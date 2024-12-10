@@ -35,7 +35,7 @@ class GetXController extends GetxController {
       "status": false,
     };
 
-    databaseReference.set(employee).then((_) {
+    databaseReference.child("${data.length}").set(employee).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Employee data saved successfully!")),
       );
@@ -46,31 +46,8 @@ class GetXController extends GetxController {
     });
   }
 
-//=========================================================
-//==================== Bottom NavBar ======================
-  // var data = {}.obs;
-
-  // final DatabaseReference _databaseRef =
-  //     FirebaseDatabase.instance.ref("Employee");
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   fetchRealtimeData();
-  // }
-
-  // Future<void> fetchRealtimeData() async {
-  //   try {
-  //     final event = await _databaseRef.once();
-  //     if (event.snapshot.value != null) {
-  //       data.value = Map<String, dynamic>.from(event.snapshot.value as Map);
-  //     } else {
-  //       data.value = {};
-  //     }
-  //   } catch (e) {
-  //     print("Error fetching data: $e");
-  //   }
-  // }
+//==================================================================
+//==================== READ ALL EMPLOYEE DATA ======================
   final databaseRef = FirebaseDatabase.instance.ref("Employee");
   var data = <Map<String, dynamic>>[].obs;
 
@@ -78,6 +55,7 @@ class GetXController extends GetxController {
   void onInit() {
     super.onInit();
     listenToRealtimeDatabase();
+    checkEmployee();
   }
 
   Future<void> listenToRealtimeDatabase() async {
@@ -85,5 +63,38 @@ class GetXController extends GetxController {
       final employees = event.snapshot.value as List<dynamic>? ?? [];
       data.value = employees.map((e) => Map<String, dynamic>.from(e)).toList();
     });
+  }
+
+//============================================================
+//==================== READ ALL FINGERS ======================
+  final databaseFingers = FirebaseDatabase.instance.ref("fingerprints");
+  var dataFingers = <String, dynamic>{}.obs;
+  Future<void> checkEmployee() async {
+    databaseFingers.onValue.listen(
+      (event) {
+        if (event.snapshot.value != null) {
+          dataFingers.value = Map<String, dynamic>.from(
+              event.snapshot.value as Map<dynamic, dynamic>);
+          for (var i = 0; i < data.length; i++) {
+            if (data[i]["finger"] == dataFingers["a_id"]) {
+              databaseRef
+                  .child("$i")
+                  .child("finger")
+                  .set(dataFingers["a_id"])
+                  .then((_) {})
+                  .catchError((error) {});
+              databaseRef
+                  .child("$i")
+                  .child("date")
+                  .set(dataFingers["b_datetamp"])
+                  .then((_) {})
+                  .catchError((error) {});
+            }
+          }
+        } else {
+          dataFingers.value = {};
+        }
+      },
+    );
   }
 }
