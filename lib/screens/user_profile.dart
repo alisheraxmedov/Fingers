@@ -1,4 +1,5 @@
 import 'package:fingerprint/consts/colors.dart';
+import 'package:fingerprint/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -12,10 +13,9 @@ class UserProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: ColorsClass.red.withOpacity(0.1),
         actions: [
           CircleAvatar(
             backgroundColor: userData["status"]
@@ -38,9 +38,13 @@ class UserProfileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+//===========================================================================
+//============================ USER INFORMATION =============================
+//===========================================================================
+            Container(
+              color: ColorsClass.red.withOpacity(0.1),
+              width: width,
               child: Column(
                 children: [
                   const CircleAvatar(
@@ -58,6 +62,7 @@ class UserProfileScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: width * 0.06,
                           fontWeight: FontWeight.bold,
+                          fontFamily: "Sumana",
                         ),
                       ),
                       SizedBox(width: width * 0.01),
@@ -68,16 +73,258 @@ class UserProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: width * 0.01),
+                  SizedBox(width: width * 0.01),
                   Text(
-                    "${userData["email"] ?? "nodefined@gmail.com"}",
+                    "id: ${userData["finger"]} ",
                     style: const TextStyle(
                       color: ColorsClass.grey,
+                      fontFamily: "Sumana",
+                    ),
+                  ),
+                  SizedBox(height: width * 0.075),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+//===========================================================================
+//=============================== CONTAINER 1 ===============================
+//===========================================================================
+                  Container(
+                    width: width,
+                    height: width * 0.4,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E5EC),
+                      borderRadius: BorderRadius.circular(width * 0.05),
+                      boxShadow: [
+                        const BoxShadow(
+                          color: ColorsClass.white,
+                          offset: Offset(-10, -10),
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        ),
+                        BoxShadow(
+                          color: ColorsClass.black.withOpacity(0.2),
+                          offset: const Offset(10, 10),
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextWidget(
+                              size: width * 0.09,
+                              color: ColorsClass.black.withOpacity(0.3),
+                              data: "General Info",
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                color: ColorsClass.red.withOpacity(0.3),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+//======================================================================================
+                            Expanded(
+                              child: ListTile(
+                                title: TextWidget(
+                                  size: width * 0.065,
+                                  color: ColorsClass.black,
+                                  data: "Salary",
+                                ),
+                                subtitle: TextWidget(
+                                  size: width * 0.04,
+                                  color: ColorsClass.grey,
+                                  data: "${userData["salary"]}",
+                                ),
+                              ),
+                            ),
+//======================================================================================
+                            Expanded(
+                              child: ListTile(
+                                title: TextWidget(
+                                  size: width * 0.065,
+                                  color: ColorsClass.black,
+                                  data: "Hours",
+                                ),
+                                subtitle: TextWidget(
+                                  size: width * 0.04,
+                                  color: ColorsClass.grey,
+                                  data: "${userData["totalHours"]} hrs",
+                                ),
+                              ),
+                            ),
+//======================================================================================
+                            Expanded(
+                              child: ListTile(
+                                title: TextWidget(
+                                  size: width * 0.065,
+                                  color: ColorsClass.black,
+                                  data: "Posit",
+                                ),
+                                subtitle: TextWidget(
+                                  size: width * 0.04,
+                                  color: ColorsClass.grey,
+                                  data: "employee",
+                                ),
+                              ),
+                            ),
+//======================================================================================
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: width * 0.075),
+//===========================================================================
+//=============================== CONTAINER 2 ===============================
+//===========================================================================
+                  Container(
+                    width: width,
+                    height: width * 0.4,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E5EC),
+                      borderRadius: BorderRadius.circular(width * 0.05),
+                      boxShadow: [
+                        const BoxShadow(
+                          color: ColorsClass.white,
+                          offset: Offset(-10, -10),
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        ),
+                        BoxShadow(
+                          color: ColorsClass.black.withOpacity(0.2),
+                          offset: const Offset(10, 10),
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextWidget(
+                              size: width * 0.09,
+                              color: ColorsClass.black.withOpacity(0.3),
+                              data: "Today's Info",
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                color: ColorsClass.red.withOpacity(0.3),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+//======================================================================================
+                            Expanded(
+                              child: ListTile(
+                                title: TextWidget(
+                                  size: width * 0.05,
+                                  color: ColorsClass.black,
+                                  data: "Begin",
+                                ),
+                                subtitle: TextWidget(
+                                  size: width * 0.04,
+                                  color: ColorsClass.grey,
+                                  data: "${userData["time"]}",
+                                ),
+                              ),
+                            ),
+//======================================================================================
+                            Expanded(
+                              child: ListTile(
+                                title: TextWidget(
+                                  size: width * 0.05,
+                                  color: ColorsClass.black,
+                                  data: "All Late",
+                                ),
+                                subtitle: TextWidget(
+                                  size: width * 0.04,
+                                  color: ColorsClass.grey,
+                                  data: "${userData["totalHours"]} hrs",
+                                ),
+                              ),
+                            ),
+//======================================================================================
+                            Expanded(
+                              child: ListTile(
+                                title: TextWidget(
+                                  size: width * 0.05,
+                                  color: ColorsClass.black,
+                                  data: "Late",
+                                ),
+                                subtitle: TextWidget(
+                                  size: width * 0.04,
+                                  color: ColorsClass.grey,
+                                  data: "${userData["lately"]} min",
+                                ),
+                              ),
+                            ),
+//======================================================================================
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatColumn(
+      String title, String value, double width, Color color) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: TextStyle(
+              fontSize: width * 0.07,
+              fontWeight: FontWeight.bold,
+              color: color),
+        ),
+        SizedBox(height: width * 0.001),
+        Text(
+          title,
+          style: const TextStyle(
+            color: ColorsClass.grey,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+/*
+Center(
+              child: Column(
+                children: [
+
             SizedBox(height: width * 0.075),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -157,31 +404,5 @@ class UserProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
 
-  Widget _buildStatColumn(
-      String title, String value, double width, Color color) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: TextStyle(
-              fontSize: width * 0.07,
-              fontWeight: FontWeight.bold,
-              color: color),
-        ),
-        SizedBox(height: width * 0.001),
-        Text(
-          title,
-          style: const TextStyle(
-            color: ColorsClass.grey,
-          ),
-        ),
-      ],
-    );
-  }
-}
+ */

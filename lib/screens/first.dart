@@ -94,7 +94,7 @@ class FirstScreen extends StatelessWidget {
               subtitle: TextWidget(
                 size: width * 0.035,
                 color: ColorsClass.grey,
-                data: "Salary: ${employee['salary']}",
+                data: "working hours: ${employee['start']} - ${employee["end"]}",
               ),
               trailing: TextWidget(
                 size: width * 0.03,

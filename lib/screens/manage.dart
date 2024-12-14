@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:fingerprint/consts/colors.dart';
-import 'package:fingerprint/functions/id_generate.dart';
 import 'package:fingerprint/getx/get.dart';
 import 'package:fingerprint/widgets/button.dart';
 import 'package:fingerprint/widgets/text.dart';
@@ -112,7 +111,6 @@ class _ManageScreenState extends State<ManageScreen> {
           getXController.saveEmployeeData(
             context: context,
             name: _nameController.text,
-            id: generateId(),
             salary: "\$${_salaryController.text}",
             profileIMG:
                 "https://www.clipartmax.com/png/middle/91-915439_to-the-functionality-and-user-experience-of-our-site-red-person-icon.png",

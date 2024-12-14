@@ -10,7 +10,6 @@ class GetXController extends GetxController {
 
   void saveEmployeeData({
     required BuildContext context,
-    required String id,
     required String name,
     required String salary,
     required String profileIMG,
@@ -23,7 +22,6 @@ class GetXController extends GetxController {
         FirebaseDatabase.instance.ref("Employee");
 
     Map<String, dynamic> employee = {
-      "ID": id,
       "name": name,
       "salary": salary,
       "profileIMG": profileIMG.isNotEmpty
@@ -33,6 +31,8 @@ class GetXController extends GetxController {
       "end": end,
       "totalHours": int.tryParse(totalHours) ?? 0,
       "status": false,
+      "date": "00",
+      "time": "00",
     };
 
     databaseReference.child("${data.length}").set(employee).then((_) {
@@ -87,6 +87,12 @@ class GetXController extends GetxController {
                   .child("$i")
                   .child("date")
                   .set(dataFingers["b_datetamp"])
+                  .then((_) {})
+                  .catchError((error) {});
+              databaseRef
+                  .child("$i")
+                  .child("time")
+                  .set(dataFingers["c_timetamp"])
                   .then((_) {})
                   .catchError((error) {});
             }
