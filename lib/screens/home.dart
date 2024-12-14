@@ -78,7 +78,7 @@ class HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _buildTab("Today", 0, width),
-                _buildTab("Statistic", 1, width),
+                _buildTab("History", 1, width),
                 _buildTab("Manage", 2, width),
               ],
             ),

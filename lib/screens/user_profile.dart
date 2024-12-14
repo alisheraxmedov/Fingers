@@ -85,6 +85,7 @@ class UserProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: width * 0.05),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.05),
               child: Column(
@@ -242,12 +243,12 @@ class UserProfileScreen extends StatelessWidget {
                                 title: TextWidget(
                                   size: width * 0.05,
                                   color: ColorsClass.black,
-                                  data: "Begin",
+                                  data: "Salary",
                                 ),
                                 subtitle: TextWidget(
                                   size: width * 0.04,
                                   color: ColorsClass.grey,
-                                  data: "${userData["time"]}",
+                                  data: "\$123",
                                 ),
                               ),
                             ),
@@ -257,15 +258,16 @@ class UserProfileScreen extends StatelessWidget {
                                 title: TextWidget(
                                   size: width * 0.05,
                                   color: ColorsClass.black,
-                                  data: "All Late",
+                                  data: "Begin",
                                 ),
                                 subtitle: TextWidget(
                                   size: width * 0.04,
                                   color: ColorsClass.grey,
-                                  data: "${userData["totalHours"]} hrs",
+                                  data: "${userData["time"]}",
                                 ),
                               ),
                             ),
+
 //======================================================================================
                             Expanded(
                               child: ListTile(

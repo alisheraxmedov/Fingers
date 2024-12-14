@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:fingerprint/consts/colors.dart';
+import 'package:fingerprint/functions/diff_time.dart';
 import 'package:fingerprint/getx/get.dart';
 import 'package:fingerprint/widgets/button.dart';
 import 'package:fingerprint/widgets/text.dart';
@@ -21,7 +22,6 @@ class _ManageScreenState extends State<ManageScreen> {
   final TextEditingController _salaryController = TextEditingController();
   final TextEditingController _startController = TextEditingController();
   final TextEditingController _endController = TextEditingController();
-  final TextEditingController _totalHoursController = TextEditingController();
   final TextEditingController _profileImgController = TextEditingController();
 
   void _clearFields() {
@@ -30,8 +30,20 @@ class _ManageScreenState extends State<ManageScreen> {
     _salaryController.clear();
     _startController.clear();
     _endController.clear();
-    _totalHoursController.clear();
     _profileImgController.clear();
+  }
+
+  Future<void> _selectTime(
+      BuildContext context, TextEditingController controller) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null) {
+      final formattedTime =
+          "${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}";
+      controller.text = formattedTime;
+    }
   }
 
   @override
@@ -47,64 +59,54 @@ class _ManageScreenState extends State<ManageScreen> {
           data: "Add Employee",
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: width * 0.1,
-        ),
-        child: ListView(
-          children: [
-            TextFieldWidget(
-              controller: _nameController,
-              width: width,
-              labelText: "Employee Name",
+      body: Obx(
+        () {
+          return Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: width * 0.1,
             ),
-            TextFieldWidget(
-              controller: _salaryController,
-              width: width,
-              labelText: "Employee Salary",
+            child: ListView(
+              children: [
+                TextFieldWidget(
+                  controller: _nameController,
+                  width: width,
+                  labelText: "Employee Name",
+                ),
+                TextFieldWidget(
+                  controller: _salaryController,
+                  width: width,
+                  labelText: "Employee Salary",
+                ),
+                TextFieldWidget(
+                  controller: _startController,
+                  width: width,
+                  labelText: "Work start time",
+                  onTap: () => _selectTime(context, _startController),
+                  readOnly: true,
+                ),
+                TextFieldWidget(
+                  controller: _endController,
+                  width: width,
+                  labelText: "Work end time",
+                  onTap: () => _selectTime(context, _endController),
+                  readOnly: true,
+                ),
+                CustomButton(
+                  btnColor: ColorsClass.red.withOpacity(
+                    getXController.opacity.value,
+                  ),
+                  btnText: getXController.newfinger.value,
+                  onTap: () {
+                    getXController.opacityChange();
+                    getXController.checkEmployee();
+                  },
+                  width: width,
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
-            TextFieldWidget(
-              controller: _startController,
-              width: width,
-              labelText: "Work start time",
-            ),
-            TextFieldWidget(
-              controller: _endController,
-              width: width,
-              labelText: "Work end time",
-            ),
-            TextFieldWidget(
-              controller: _totalHoursController,
-              width: width,
-              ktype: TextInputType.number,
-              labelText: "Total hours",
-            ),
-            TextFieldWidget(
-              controller: _profileImgController,
-              width: width,
-              labelText: "Profile image url",
-            ),
-            CustomButton(
-              btnColor: ColorsClass.backgroundColor,
-              btnText: "asdadasdasd",
-              onTap: () {
-                getXController.checkEmployee();
-              },
-              width: width,
-            ),
-            const SizedBox(height: 20),
-            // TextWidget(
-            //   size: width * 0.07,
-            //   color: ColorsClass.black,
-            //   data: getXController.dataFingers["a_id"],
-            // ),
-            // TextWidget(
-            //   size: width * 0.07,
-            //   color: ColorsClass.black,
-            //   data: getXController.dataFingers["b_datetamp"],
-            // ),
-          ],
-        ),
+          );
+        },
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
@@ -116,8 +118,12 @@ class _ManageScreenState extends State<ManageScreen> {
                 "https://www.clipartmax.com/png/middle/91-915439_to-the-functionality-and-user-experience-of-our-site-red-person-icon.png",
             start: _startController.text,
             end: _endController.text,
-            totalHours: _totalHoursController.text,
+            totalHours: "${DifferentTimeClass.catculateHours(
+              _startController.text,
+              _endController.text,
+            )}",
             status: false,
+            fingerprint: "",
           );
           _clearFields();
         },

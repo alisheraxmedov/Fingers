@@ -17,6 +17,7 @@ class GetXController extends GetxController {
     required String end,
     required String totalHours,
     required bool status,
+    required String fingerprint,
   }) {
     final DatabaseReference databaseReference =
         FirebaseDatabase.instance.ref("Employee");
@@ -24,6 +25,7 @@ class GetXController extends GetxController {
     Map<String, dynamic> employee = {
       "name": name,
       "salary": salary,
+      "finger": fingerprint,
       "profileIMG": profileIMG.isNotEmpty
           ? profileIMG
           : "https://www.clipartmax.com/png/middle/91-915439_to-the-functionality-and-user-experience-of-our-site-red-person-icon.png",
@@ -33,6 +35,8 @@ class GetXController extends GetxController {
       "status": false,
       "date": "00",
       "time": "00",
+      "lately": "0",
+      "allLate": "0",
     };
 
     databaseReference.child("${data.length}").set(employee).then((_) {
@@ -69,6 +73,7 @@ class GetXController extends GetxController {
 //==================== READ ALL FINGERS ======================
   final databaseFingers = FirebaseDatabase.instance.ref("fingerprints");
   var dataFingers = <String, dynamic>{}.obs;
+  final RxString newfinger = "not available".obs;
   Future<void> checkEmployee() async {
     databaseFingers.onValue.listen(
       (event) {
@@ -99,8 +104,14 @@ class GetXController extends GetxController {
           }
         } else {
           dataFingers.value = {};
+          newfinger.value = dataFingers["a_id"];
         }
       },
     );
+  }
+
+  RxDouble opacity = 0.1.obs;
+  void opacityChange() {
+    opacity.value == 0.1 ? opacity.value = 0.5 : opacity.value = 0.1;
   }
 }

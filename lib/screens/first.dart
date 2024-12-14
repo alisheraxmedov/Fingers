@@ -60,6 +60,7 @@
 // }
 
 import 'package:fingerprint/consts/colors.dart';
+import 'package:fingerprint/functions/diff_time.dart';
 import 'package:fingerprint/getx/get.dart';
 import 'package:fingerprint/screens/user_profile.dart';
 import 'package:fingerprint/widgets/text.dart';
@@ -94,12 +95,14 @@ class FirstScreen extends StatelessWidget {
               subtitle: TextWidget(
                 size: width * 0.035,
                 color: ColorsClass.grey,
-                data: "working hours: ${employee['start']} - ${employee["end"]}",
+                data:
+                    "working hours: ${employee['start']} - ${employee["end"]}",
               ),
               trailing: TextWidget(
                 size: width * 0.03,
                 color: ColorsClass.red,
-                data: employee['status'] ? "Active" : "Inactive",
+                data:
+                    "${DifferentTimeClass.calculateMinutes(employee['start'], employee['time'])} min",
               ),
               onTap: () {
                 Get.to(
