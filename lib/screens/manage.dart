@@ -118,7 +118,7 @@ class _ManageScreenState extends State<ManageScreen> {
                 "https://www.clipartmax.com/png/middle/91-915439_to-the-functionality-and-user-experience-of-our-site-red-person-icon.png",
             start: _startController.text,
             end: _endController.text,
-            totalHours: "${DifferentTimeClass.catculateHours(
+            totalHours: "${DifferentTimeClass.calculateHours(
               _startController.text,
               _endController.text,
             )}",

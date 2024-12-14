@@ -100,7 +100,11 @@ class FirstScreen extends StatelessWidget {
               ),
               trailing: TextWidget(
                 size: width * 0.03,
-                color: ColorsClass.red,
+                color: DifferentTimeClass.calculateMinutes(
+                            employee['start'], employee['time']) ==
+                        0
+                    ? ColorsClass.green
+                    : ColorsClass.red,
                 data:
                     "${DifferentTimeClass.calculateMinutes(employee['start'], employee['time'])} min",
               ),
