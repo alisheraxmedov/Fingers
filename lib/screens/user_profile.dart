@@ -1,6 +1,8 @@
 import 'package:fingerprint/consts/colors.dart';
+import 'package:fingerprint/functions/delete.dart';
 import 'package:fingerprint/widgets/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class UserProfileScreen extends StatelessWidget {
   final Map<String, dynamic> userData;
@@ -16,20 +18,27 @@ class UserProfileScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorsClass.red.withOpacity(0.1),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: ColorsClass.white,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         actions: [
           CircleAvatar(
-            backgroundColor: userData["status"]
-                ? ColorsClass.green.withOpacity(0.15)
-                : ColorsClass.red.withOpacity(0.15),
-            child: userData["status"]
-                ? Icon(
-                    Icons.done_outline_rounded,
-                    color: ColorsClass.green,
-                  )
-                : const Icon(
-                    Icons.cancel,
-                    color: ColorsClass.red,
-                  ),
+            backgroundColor: ColorsClass.red.withOpacity(0.1),
+            child: IconButton(
+              icon: const Icon(
+                Icons.delete,
+                color: ColorsClass.red,
+              ),
+              onPressed: () {
+                DeleteClass.deleteWithId(userData["finger"]);
+              },
+            ),
           ),
           SizedBox(
             width: width * 0.05,

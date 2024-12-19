@@ -110,8 +110,14 @@ class GetXController extends GetxController {
     );
   }
 
+//================================================================
+//================= CHANGE FINGER BUTTON COLOR ===================
   RxDouble opacity = 0.1.obs;
   void opacityChange() {
     opacity.value == 0.1 ? opacity.value = 0.5 : opacity.value = 0.1;
   }
+
+//================================================================
+//================= CHANGE FINGER BUTTON COLOR ===================
+  
 }

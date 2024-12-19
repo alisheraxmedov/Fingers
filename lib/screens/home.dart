@@ -1,5 +1,7 @@
 import 'package:fingerprint/consts/colors.dart';
 import 'package:fingerprint/consts/pages.dart';
+import 'package:fingerprint/functions/check_state.dart';
+import 'package:fingerprint/screens/settings.dart';
 import 'package:fingerprint/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,14 +55,18 @@ class HomeScreenState extends State<HomeScreen> {
           data: 'Attendance',
         ),
         actions: [
-          GestureDetector(
-            onTap: () {
-              // GetXController getXController = Get.find();
+          IconButton(
+            onPressed: () {
+              Get.to(
+                const SettingsScreen(),
+                transition: Transition.circularReveal,
+                duration: Duration(seconds: 1),
+              );
             },
-            child: const CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://www.clipartmax.com/png/middle/91-915439_to-the-functionality-and-user-experience-of-our-site-red-person-icon.png',
-              ),
+            icon: Icon(
+              Icons.settings,
+              color: Colors.red,
+              size: width * 0.065,
             ),
           ),
           SizedBox(
@@ -89,6 +95,11 @@ class HomeScreenState extends State<HomeScreen> {
               onPageChanged: (index) {
                 setState(() {
                   _selectedIndex = index;
+                  if (_selectedIndex == 2) {
+                    CheckState.updateStateToAdd();
+                  } else {
+                    CheckState.updateStateToCheck();
+                  }
                 });
               },
               children: PagesClass.pages,
