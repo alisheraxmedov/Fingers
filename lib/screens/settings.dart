@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: ColorsClass.white,
+            color: ColorsClass.red,
           ),
           onPressed: () {
             Get.back();
@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         centerTitle: true,
         title: TextWidget(
           size: width * 0.07,
-          color: ColorsClass.white,
+          color: ColorsClass.red,
           data: "Settings",
         ),
       ),

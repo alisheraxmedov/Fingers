@@ -4,7 +4,7 @@ class CheckState {
   static final DatabaseReference database = FirebaseDatabase.instance.ref();
   static void updateStateToAdd() async {
     try {
-      await database.child('Sinov/state').set("add");
+      await database.child('Sinov/state').set("saqlash");
       print("State muvaffaqiyatli o'zgartirildi: add");
     } catch (e) {
       print('Xatolik yuz berdi: $e');

@@ -15,7 +15,7 @@ class DeleteClass {
     try {
       await database.child('Sinov').set({
         "state": "o'chirish",
-        "id": id,
+        "db_id": id,
       });
       print("Employee muvaffaqiyatli o'chirildi");
     } catch (e) {

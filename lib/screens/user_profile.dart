@@ -21,7 +21,7 @@ class UserProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: ColorsClass.white,
+            color: ColorsClass.red,
           ),
           onPressed: () {
             Get.back();
@@ -37,6 +37,7 @@ class UserProfileScreen extends StatelessWidget {
               ),
               onPressed: () {
                 DeleteClass.deleteWithId(userData["finger"]);
+                Get.back();
               },
             ),
           ),

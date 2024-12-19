@@ -37,10 +37,11 @@ class HomeScreenState extends State<HomeScreen> {
         backgroundColor: ColorsClass.red.withOpacity(
           0.25,
         ),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: ColorsClass.white,
+            color: ColorsClass.red,
           ),
           onPressed: () {
             Get.to(
@@ -51,7 +52,7 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         title: TextWidget(
           size: width * 0.075,
-          color: ColorsClass.white,
+          color: ColorsClass.red,
           data: 'Attendance',
         ),
         actions: [
@@ -59,8 +60,8 @@ class HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Get.to(
                 const SettingsScreen(),
-                transition: Transition.circularReveal,
-                duration: Duration(seconds: 1),
+                transition: Transition.downToUp,
+                duration: const Duration(seconds: 1),
               );
             },
             icon: Icon(
